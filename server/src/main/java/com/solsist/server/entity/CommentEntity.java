@@ -44,6 +44,7 @@ public class CommentEntity implements Serializable {
     private LocalDateTime gmtCreate;
 
     @TableField(value = "gmt_modified")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime gmtModified;
 
 

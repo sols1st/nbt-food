@@ -3,13 +3,13 @@ package com.solsist.server.util;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import org.springframework.beans.factory.annotation.Value;
 
 public class CodeGenerator {
 
     String url = "localhost";
     String username = "root";
     String password = "chen881587";
+    static String[] tables = new String[]{"restaurant"};
 
     public void generateCode(String table) {
         FastAutoGenerator.create(new DataSourceConfig.Builder("jdbc:mysql://" + url + ":3306/javaweb?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false", username, password))
@@ -32,6 +32,7 @@ public class CodeGenerator {
                             .service("templates/service.java")
                             .serviceImpl("templates/serviceImpl.java")
                             .mapper("templates/mapper.java")
+                            .controller("templates/controller.java")
                             .build();
                         }
 
@@ -54,7 +55,6 @@ public class CodeGenerator {
     }
 
     public static void main(String[] args) {
-        String[] tables = new String[]{"comment","location","restaurant"};
         CodeGenerator generator = new CodeGenerator();
         for (String table : tables){
             generator.generateCode(table);

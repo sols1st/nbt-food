@@ -29,7 +29,7 @@ public class UserController {
      * @return 用户列表
      */
     @GetMapping("list")
-    public List<UserEntity> getUserList() {
+    public List<UserEntity> list() {
         List<UserEntity> list = userService.list();
         return list;
     }
@@ -40,7 +40,7 @@ public class UserController {
      * @return 分页结果
      */
     @RequestMapping("page")
-    public ResponseDTO getUserPage(@RequestBody PageDTO pageDTO) {
+    public ResponseDTO page(@RequestBody PageDTO pageDTO) {
         JSONObject param = pageDTO.getQueryParams();
         int id = param.getIntValue("id");
         String username = param.getString("username");
