@@ -8,7 +8,7 @@ public class CodeGenerator {
 
     String url = "localhost";
     String username = "root";
-    String password = "chen881587";
+    String password = "";
     static String[] tables = new String[]{"restaurant"};
 
     public void generateCode(String table) {
