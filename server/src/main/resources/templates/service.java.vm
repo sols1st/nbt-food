@@ -1,0 +1,31 @@
+package ${package.Service};
+
+    #set($name = ${table.controllerName})
+    #set($cName = ${name.replace("Controller","")})
+    #set($sName = ${cName.toLowerCase()})
+    #set($name = ${table.serviceName})
+    #set($nowPath = ${package.Service})
+    #set($dPath = ${nowPath.replace("service","entity")})
+    #set($sPath = ${nowPath.replace("service","service")})
+    #set($ePath = ${nowPath.replace("service","entity")})
+    #set($rPath = ${nowPath.replaceAll(".service.*","")})
+
+import ${package.Entity}.${entity};
+import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
+
+/**
+ * <p>
+ * $!{table.comment} 服务类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${kotlin})
+interface ${table.serviceName} : ${superServiceClass}<${entity}>
+#else
+public interface ${table.serviceName} extends IService<${cName}Entity> {
+        }
+#end

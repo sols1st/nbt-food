@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @TableName(value = "user")
-public class User {
+public class UserEntity {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 

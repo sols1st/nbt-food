@@ -1,20 +1,21 @@
 package com.solsist.server.util;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import org.springframework.beans.factory.annotation.Value;
 
 public class CodeGenerator {
 
-    String url = "jdbc:mysql://localhost:3306/javaweb?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false";
+    String url = "localhost";
     String username = "root";
     String password = "chen881587";
 
-    public void generateCode() {
-        System.out.println(url);
-        FastAutoGenerator.create(new DataSourceConfig.Builder(url, username, password))
+    public void generateCode(String table) {
+        FastAutoGenerator.create(new DataSourceConfig.Builder("jdbc:mysql://" + url + ":3306/javaweb?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false", username, password))
                 .globalConfig(builder -> {
                     builder.author("solsist")
+                            .disableOpenDir()
                             .commentDate("2024-01-01")
                             .outputDir("src\\main\\java");
                 })
@@ -25,14 +26,38 @@ public class CodeGenerator {
                             .service("service")
                             .controller("controller");
                 })
+                .templateConfig(builder -> {
+                    builder.disable()
+                        .entity("templates/entity.java")
+                            .service("templates/service.java")
+                            .serviceImpl("templates/serviceImpl.java")
+                            .mapper("templates/mapper.java")
+                            .build();
+                        }
+
+                )
                 .strategyConfig(builder -> {
-                    builder.addInclude("container").build();
-                })
-                .execute();
+                    builder.addInclude(table)
+                            .entityBuilder()
+                            .idType(IdType.AUTO)
+                            .formatFileName("%sEntity")
+                            .enableLombok() //使用lombok
+                            .enableTableFieldAnnotation()//实体类字段注解
+                            .serviceBuilder()
+                            .formatServiceFileName("%sService")
+                            .formatServiceImplFileName("%sServiceImpl")
+                            .mapperBuilder()
+                            .enableMapperAnnotation()//开启mapper注解
+                            .enableBaseResultMap()//启用 BaseResultMap 生成
+                            .enableBaseColumnList();//启用 BaseColumnList
+                }).execute();
     }
 
     public static void main(String[] args) {
+        String[] tables = new String[]{"comment","location","restaurant"};
         CodeGenerator generator = new CodeGenerator();
-        generator.generateCode();
+        for (String table : tables){
+            generator.generateCode(table);
+        }
     }
 }

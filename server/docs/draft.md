@@ -24,7 +24,7 @@
     - gmt_create
     - gmt_modified
     
- - ### user
+ - ### userEntity
     - id
     - role
     - username
@@ -32,17 +32,3 @@
     - nickname
     - avatar
     - gmt_create
-
-
-```json
-{
-   "page": {
-      "currentPage": 1,
-      "pageSize": 20 
-   },
-   "queryParams": {
-      "name": "张三", 
-      "age": 30
-   }
-}
-```

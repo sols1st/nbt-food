@@ -1,0 +1,166 @@
+package ${package.Controller};
+    #set($name = ${table.controllerName})
+    #set($cName = ${name.replace("Controller","")})
+    #set($sName = ${cName.toLowerCase()})
+    #set($name = ${table.controllerName})
+    #set($nowPath = ${package.Controller})
+    #set($dPath = ${nowPath.replace("controller","dto")})
+    #set($sPath = ${nowPath.replace("controller","service")})
+    #set($ePath = ${nowPath.replace("controller","entity")})
+    #set($rPath = ${nowPath.replaceAll(".controller.*","")})
+
+    #if(${restControllerStyle})
+    import org.springframework.web.bind.annotation.RestController;
+    #else
+    import org.springframework.stereotype.Controller;
+    #end
+    #if(${superControllerClassPackage})
+    import ${superControllerClassPackage};
+    #end
+
+import com.alibaba.fastjson.JSONObject;
+import ${rPath}.config.exception.CommonJsonException;
+import ${rPath}.config.interceptor.aop.annotation.RequiresPermissions;
+import ${rPath}.dto.utils.TableReqDTO;
+import ${rPath}.dto.utils.TableRspDTO;
+import ${ePath}.${cName}Entity;
+import ${sPath}.${cName}Service;
+import ${rPath}.utils.common.CommonUtil;
+import ${rPath}.utils.common.ErrorEnum;
+import ${rPath}.dto.utils.TokenDTO;
+import ${rPath}.utils.auth.JWTUtil;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.annotation.Resource;
+import java.util.List;
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("/api/$sName")
+@Api(tags = "$sName")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+    #if(${superControllerClass})
+    public class ${table.controllerName} extends ${superControllerClass} {
+    #else
+    public class ${table.controllerName} {
+
+    private final Logger log=LoggerFactory.getLogger(${table.controllerName}.class);
+
+    @Resource
+    private  ${cName}Service ${sName}Service;
+
+
+    @ApiOperation(value = "查询分页列表")
+    @RequestMapping(value = "/query", method = RequestMethod.POST)
+    @RequiresPermissions(value = "", times = 30, second = 1)
+    public TableRspDTO query(@RequestBody TableReqDTO tableReqDTO,
+    @RequestHeader(name = "Access-Token") String token){
+            TableRspDTO tableRspDTO;
+            try{
+            tableRspDTO= ${sName}Service.list${cName}ByPage(tableReqDTO,JWTUtil.verifyToken(token));
+            }catch(CommonJsonException e){throw e;}
+            catch(Exception e){
+            log.error(e.toString());
+            throw new CommonJsonException(ErrorEnum.E_400);
+            }
+            return tableRspDTO;
+            }
+
+    @ApiOperation(value = "单独查询接口")
+    @RequestMapping(value = "/queryOne/{id}", method = RequestMethod.GET)
+    @RequiresPermissions(value = "", times = 30, second = 1)
+    public JSONObject queryOne${cName}(@PathVariable Long id){
+            try{
+            return CommonUtil.successJson(${sName}Service.queryOne${cName}(id));
+            }catch(CommonJsonException e){throw e;}
+            catch(Exception e)
+            {
+            log.error(e.toString());
+            throw new CommonJsonException(ErrorEnum.E_400);
+            }
+            }
+
+    @ApiOperation(value = "新增接口")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequiresPermissions(value = "", times = 30, second = 1)
+    public JSONObject add${cName}(@RequestBody ${cName}Entity ${sName}Entity,
+    @RequestHeader(name = "Access-Token") String token){
+            try{TokenDTO tokenDTO = JWTUtil.verifyToken(token);
+            return CommonUtil.successJson(${sName}Service.add${cName}(${sName}Entity));
+            }catch(CommonJsonException e){throw e;}
+            catch(Exception e)
+            {
+            log.error(e.toString());
+            throw new CommonJsonException(ErrorEnum.E_400);
+            }
+            }
+
+    @ApiOperation(value = "修改接口")
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @RequiresPermissions(value = "", times = 30, second = 1)
+    public JSONObject update${cName}(@RequestBody ${cName}Entity ${sName}Entity,
+    @RequestHeader(name = "Access-Token") String token){
+            try{
+                TokenDTO tokenDTO = JWTUtil.verifyToken(token);
+                return CommonUtil.successJson(${sName}Service.update${cName}(${sName}Entity));
+            }
+            catch(CommonJsonException e){throw e;}
+            catch(Exception e)
+            {
+            log.error(e.toString());
+            throw new CommonJsonException(ErrorEnum.E_400);
+            }
+            }
+
+    @ApiOperation(value = "删除接口")
+    @RequestMapping(value = "/remove/{ids}", method = RequestMethod.DELETE)
+    @RequiresPermissions(value = "", times = 30, second = 1)
+    public JSONObject remove${cName}(@PathVariable String ids,
+    @RequestHeader(name = "Access-Token") String token){
+            try{TokenDTO tokenDTO = JWTUtil.verifyToken(token);
+            return CommonUtil.successJson(${sName}Service.remove${cName}(ids));
+            }catch(CommonJsonException e){throw e;}
+            catch(Exception e)
+            {
+            log.error(e.toString());
+            throw new CommonJsonException(ErrorEnum.E_400);
+            }
+            }
+
+    @ApiOperation(value = "获取列表（不分页）")
+    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
+    @RequiresPermissions(value = "", times = 30, second = 1)
+    public JSONObject listAll${cName}(@RequestHeader(name = "Access-Token") String token) {
+            try{TokenDTO tokenDTO = JWTUtil.verifyToken(token);
+            return CommonUtil.successJson(${sName}Service.listAll${cName}(tokenDTO));
+            } catch(CommonJsonException e){throw e;}
+            catch(Exception e)
+            {
+            log.error(e.toString());
+            throw new CommonJsonException(ErrorEnum.E_400);
+            }
+            }
+    #end
+
+        }
+
+#end

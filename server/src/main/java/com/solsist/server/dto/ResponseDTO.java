@@ -15,6 +15,7 @@ public class ResponseDTO<T> {
         return new ResponseDTO<>(200, t, "success");
     }
 
+
     public static <T> ResponseDTO<T> ok(T t, String msg) {
         return new ResponseDTO<>(200, t, msg);
     }
@@ -29,6 +30,5 @@ public class ResponseDTO<T> {
     public static <T> ResponseDTO<T> fail(T t, String msg) {
         return new ResponseDTO<>(-1, t, msg);
     }
-
 
 }

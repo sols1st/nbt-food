@@ -1,0 +1,43 @@
+package ${package.ServiceImpl};
+
+    #set($name = ${table.serviceImplName})
+    #set($cName = ${name.replace("ServiceImpl","")})
+    #set($sName = ${cName.toLowerCase()})
+    #set($name = ${table.serviceName})
+    #set($nowPath = ${package.ServiceImpl})
+    #set($dPath = $nowPath.replace("service","dto").replace(".impl",""))
+    #set($ePath = $nowPath.replace("service","entity").replace(".impl",""))
+    #set($mPath = $nowPath.replace("service","mapper").replace(".impl",""))
+    #set($sPath = $nowPath.replace(".impl",""))
+    #set($rPath = $nowPath.replaceAll(".service.*",""))
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+#if(${kotlin})
+open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>(), ${table.serviceName} {
+
+        }
+#else
+        public class ${table.serviceImplName} extends ServiceImpl<${cName}Mapper, ${cName}Entity> implements ${table.serviceName} {
+        }
+#end
