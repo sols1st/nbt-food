@@ -26,6 +26,7 @@ public class UserController {
 
     /**
      * 查询所有用户
+     *
      * @return 用户列表
      */
     @GetMapping("list")
@@ -36,10 +37,11 @@ public class UserController {
 
     /**
      * 分页查询用户
+     *
      * @param pageDTO 分页参数
      * @return 分页结果
      */
-    @RequestMapping("page")
+    @GetMapping("page")
     public ResponseDTO page(@RequestBody PageDTO pageDTO) {
         JSONObject param = pageDTO.getQueryParams();
         int id = param.getIntValue("id");
@@ -58,7 +60,6 @@ public class UserController {
 
     @PostMapping("/login")
     public UserEntity login(@RequestBody Map<String, String> request) {
-        log.info("login: {}", request);
         String username = request.get("username");
         String password = request.get("password");
         return userService.login(username, password);
@@ -69,4 +70,39 @@ public class UserController {
     public boolean register(@RequestBody UserEntity userEntity) {
         return userService.register(userEntity);
     }
+
+
+    /**
+     * 删除用户
+     *
+     * @param id 用户id
+     * @return 删除结果
+     */
+    @DeleteMapping("/delete/{id}")
+    public ResponseDTO delete(@PathVariable("id") int id) {
+        boolean remove = userService.removeById(id);
+        if (remove) {
+            return ResponseDTO.ok("删除成功");
+        } else {
+            return ResponseDTO.fail("删除失败");
+        }
+    }
+
+    /**
+     * 更新用户
+     *
+     * @param userEntity 用户实体
+     * @return 更新结果
+     */
+    @PutMapping("/update")
+    public ResponseDTO update(@RequestBody UserEntity userEntity) {
+        boolean update = userService.updateById(userEntity);
+        if (update) {
+            return ResponseDTO.ok("更新成功");
+        } else {
+            return ResponseDTO.fail("更新失败");
+        }
+    }
+
+
 }
