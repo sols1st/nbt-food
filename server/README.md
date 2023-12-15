@@ -15,8 +15,4 @@ spring.redis.host=10.89.193.12
 spring.redis.port=6379
 spring.redis.password=
 
-wx.app.id=
-wx.app.secret=
-
 mybatis-plus.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
-```
