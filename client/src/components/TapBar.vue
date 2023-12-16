@@ -16,7 +16,7 @@
   
 <script setup lang="ts">
 import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonLabel, IonIcon } from '@ionic/vue';
-import { fastFoodOutline, diceOutline, personCircleOutline } from 'ionicons/icons';
+import { fastFoodOutline, createOutline, diceOutline, personCircleOutline } from 'ionicons/icons';
 
 interface tab {
     tab: string,
@@ -43,6 +43,12 @@ const tabs: tab[] = [
         href: "/search",
         icon: personCircleOutline,
         label: "个人资料"
+    },
+    {
+        tab: "manage",
+        href: "/detail/1",
+        icon: createOutline ,
+        label: "管理"
     },
 ]
 

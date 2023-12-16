@@ -41,5 +41,7 @@ public class RestaurantEntity implements Serializable {
     @TableField(value = "location_id")
     private Integer locationId;
 
+    @TableField(value = "location_name")
+    private String locationName;
 
 }

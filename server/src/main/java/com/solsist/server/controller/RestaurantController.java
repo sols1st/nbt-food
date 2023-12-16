@@ -31,7 +31,7 @@ public class RestaurantController {
     private LocationService locationService;
 
     /**
-     * 查询所有餐馆
+     * 查询所有餐馆以地点分类
      *
      * @return ResponseDTO
      */
@@ -51,8 +51,9 @@ public class RestaurantController {
     }
 
     /**
-     *  随机获取一个餐馆
-     *  @return ResponseDTO
+     * 随机获取一个餐馆
+     *
+     * @return ResponseDTO
      */
     @GetMapping("random")
     public ResponseDTO random() {
@@ -61,6 +62,21 @@ public class RestaurantController {
         return ResponseDTO.ok(list.get(index));
     }
 
+    /**
+     * 通过id查询单个餐馆
+     *
+     * @return ResponseDTO
+     */
+    @GetMapping("query/{id}")
+    public ResponseDTO query(@PathVariable("id") Integer id) {
+        RestaurantEntity restaurant = restaurantService.getById(id);
+        if (restaurant != null) {
+            return ResponseDTO.ok(restaurant);
+        } else {
+            return ResponseDTO.fail(404,"没有找到对应餐馆");
+        }
+
+    }
 
     /**
      * 分页查询餐馆
@@ -86,13 +102,14 @@ public class RestaurantController {
 
     /**
      * 添加餐馆
+     *
      * @param restaurantEntity 餐馆实体
      * @return 添加结果
      */
     @PostMapping("add")
     public ResponseDTO add(@RequestBody RestaurantEntity restaurantEntity) {
         boolean save = restaurantService.save(restaurantEntity);
-        if(save) {
+        if (save) {
             return ResponseDTO.ok("添加成功");
         } else {
             return ResponseDTO.fail("添加失败");
@@ -101,13 +118,14 @@ public class RestaurantController {
 
     /**
      * 删除餐馆
+     *
      * @param id 餐馆id
      * @return 删除结果
      */
     @DeleteMapping("delete/{id}")
     public ResponseDTO delete(@PathVariable("id") Integer id) {
         boolean remove = restaurantService.removeById(id);
-        if(remove) {
+        if (remove) {
             return ResponseDTO.ok("删除成功");
         } else {
             return ResponseDTO.fail("删除失败");
@@ -116,13 +134,14 @@ public class RestaurantController {
 
     /**
      * 更新餐馆
+     *
      * @param restaurantEntity 餐馆实体
      * @return 更新结果
      */
     @PutMapping("update")
     public ResponseDTO update(@RequestBody RestaurantEntity restaurantEntity) {
         boolean update = restaurantService.updateById(restaurantEntity);
-        if(update) {
+        if (update) {
             return ResponseDTO.ok("更新成功");
         } else {
             return ResponseDTO.fail("更新失败");

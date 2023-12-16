@@ -5,6 +5,7 @@ interface Restaurant {
     userId?: number
     description?: string
     locationId?: number
+    locationName?: string
 }
 
 interface Location {

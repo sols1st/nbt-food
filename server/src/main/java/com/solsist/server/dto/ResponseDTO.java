@@ -26,6 +26,10 @@ public class ResponseDTO<T> {
     public static <T> ResponseDTO<T> fail(String msg) {
         return new ResponseDTO<>(-1, null, msg);
     }
+
+    public static ResponseDTO fail(int code,String msg) {
+        return new ResponseDTO<>(code, null, msg);
+    }
     public static ResponseDTO fail() {
         return new ResponseDTO<>(-1, null, "fail");
     }

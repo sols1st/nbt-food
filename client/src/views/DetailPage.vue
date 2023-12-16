@@ -1,0 +1,178 @@
+<template>
+    <ion-page mode="ios">
+        <ion-header>
+            <ion-toolbar>
+                <ion-title>详情页</ion-title>
+            </ion-toolbar>
+        </ion-header>
+
+        <ion-content>
+            <div class="flex flex-col px-[20px] pt-[20px] items-start gap-[20px] self-stretch">
+                <div class="flex items-start gap-[16px] self-stretch">
+                    <div style="border: 1px solid rgba(0, 0, 0, 0.25);"
+                        class="w-[118px] h-[118px] flex-shrink-0 rounded-[30px] overflow-hidden">
+                        <img src="../assets/jysb.png" class="w-full h-auto">
+                    </div>
+                    <div class="flex flex-col items-start gap-[11px] self-stretch">
+                        <div class="flex flex-col items-start flex-grow self-stretch">
+                            <div class="flex items-start self-stretch">
+                                <a class="text-textBlack-light text-[22px] font-semibold leading-[23px] tracking-wider">
+                                    {{ restaurant.name }}
+                                </a>
+                            </div>
+                            <div class="flex items-start gap-[10px] self-stretch">
+                                <a class="text-systemGrey-light text-[11px] font-normal leading-normal tracking-wider">
+                                    位置:{{
+                                        restaurant.locationName }}</a>
+                            </div>
+                            <div class="flex items-start gap-[10px] self-stretch">
+                                <a class="text-systemGrey-light text-[11px] font-normal leading-normal tracking-wider"> {{
+                                    restaurant.description }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full h-[0.5px] bg-separatorColor-light-withTrans"></div>
+
+            </div>
+            <div class="flex flex-col px-[19px] pt-[16px] items-start gap-y-[14px]">
+                <div class="flex items-center gap-[16px] self-stretch">
+                    <div class="flex flex-col justify-center items-start flex-grow flex-shrink-0 basis-0">
+                        <a class="text-textBlack-light font-semibold text-[17px] leading-normal tracking-[0.68px]">评分及评论</a>
+                    </div>
+                    <button class="flex p-[3px] items-start bg-systemWhite-light">
+                        <a class="text-systemBlue-light text-[14px] leading-normal tracking-[-0.14px] font-normal">查看全部</a>
+                    </button>
+                </div>
+                <div class="flex items-center gap-[16px] self-stretch">
+                    <div class="flex flex-col justify-center items-center gap-[4px]">
+                        <div class="flex items-start">
+                            <a
+                                class=" text-rateColor-light-rate text-[60px] font-bold leading-[48px] tracking-[-1.8px]">4.7</a>
+                        </div>
+                        <div class="flex items-start">
+                            <a
+                                class=" flex items-start text-rateColor-light-label text-[15px] font-bold tracking-widest">满分5分</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-end gap-[4px] flex-grow">
+                        <!-- 星级表 -->
+                    </div>
+                </div>
+                <div class="w-full h-[0.5px] bg-separatorColor-light-withTrans"></div>
+                <div class="flex items-center gap-[16px] self-stretch">
+                    <div class="flex items-start flex-grow">
+                        <a style="font-family: SF Pro Text;"
+                            class="text-rateColor-light-label text-[14px] font-medium tracking-wider">轻点评分：</a>
+                    </div>
+                    <div class="flex items-start gap-[20px]">
+                        <svg class="w-[24px] h-[23px]" v-for="_ in [1, 1, 1, 1, 1]" xmlns="http://www.w3.org/2000/svg"
+                            width="26" height="25" viewBox="0 0 26 25" fill="none">
+                            <path d="M9.5 8.5L13 1L16.5 8.5H25L18.5 15L20.5 24L13 19L5.5 24L7.5 15L1 8.5H9.5Z"
+                                stroke="#377CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-col w-[100%] self-center gap-[14px] mb-[20px]">
+                    <CommentCard v-for="_ in [1, 2, 3]"></CommentCard>
+                </div>
+            </div>
+        </ion-content>
+    </ion-page>
+</template>
+  
+<script setup lang="ts">
+import { ref } from 'vue';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonPage } from '@ionic/vue';
+import CommentCard from '@/components/CommentCard.vue';
+import { Restaurant } from '@/models/restaurant';
+import { useRoute } from 'vue-router';
+import Axios from '@/utils/axios';
+const route = useRoute();
+const restaurantId = route.params.id;
+
+
+var url = "/restaurant/query/" + restaurantId
+const restaurant = ref({} as Restaurant);
+
+Axios(url, null, 'GET').then(res => {
+    console.log(res)
+    restaurant.value = res
+}).catch(err => {
+    console.log(err)
+})
+
+
+// const restaurant:Restaurant = {
+//     id: 1
+//     name?: string
+//     pic?: string
+//     userId?: number
+//     description?: string
+//     locationId?: number
+// }
+
+
+
+// import Axios from '@/utils/axios'
+
+
+
+
+
+// const totalStars = 5;
+// const selectedStars = ref(0);
+// const comment = ref('');
+// const comments = [
+//     {
+//         id: 1,
+//         author: 'John Doe',
+//         date: '2023-12-15',
+//         text: 'This is a great product!',
+//     },
+//     {
+//         id: 2,
+//         author: 'Jane Smith',
+//         date: '2023-12-14',
+//         text: 'I highly recommend it!',
+//     },
+// ];
+
+// const restaurant = {
+//     name: '餐馆名称',
+//     description: '餐馆描述',
+//     image: 'http://192.168.10.233:8080/api/pic/FriDec15001548CST2023.jpg',
+// };
+
+// const getStarIcon = (star: number): string => {
+//     return star <= selectedStars.value ? 'star' : 'star-outline';
+// };
+
+// const selectStars = (star: number): void => {
+//     selectedStars.value = star;
+// };
+
+// const submitComment = (): void => {
+//     if (comment.value.trim() !== '') {
+//         const newComment = {
+//             id: comments.length + 1,
+//             author: 'Anonymous',
+//             date: new Date().toISOString().split('T')[0],
+//             text: comment.value,
+//         };
+//         comments.push(newComment);
+//         comment.value = '';
+//     }
+// };
+
+// const formatDate = (dateString: string): string => {
+//     const options = { year: 'numeric', month: 'long', day: 'numeric' };
+//     const date = new Date(dateString);
+//     return date.toLocaleDateString(undefined, options);
+// };
+</script>
+  
+<style scoped>
+/* Customize styles as needed */
+</style>
