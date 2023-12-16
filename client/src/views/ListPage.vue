@@ -1,12 +1,3 @@
-<style scoped>
-.example-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-</style>
-
 <template>
     <ion-page mode="ios">
         <ion-header>
@@ -21,7 +12,7 @@
                 </ion-item-divider>
 
                 <ion-item v-for="r in item.restaurantList">
-                    <ion-label>{{ r.name }}</ion-label>
+                    <ion-label :router-link="'/detail/' + r.id" router-direction="back">{{ r.name }}</ion-label>
                 </ion-item>
             </ion-item-group>
         </ion-content>
@@ -30,9 +21,13 @@
 
 <script lang="ts" setup>
 import Axios from "@/utils/axios"
-import { IonHeader, IonToolbar,  IonTitle, IonContent, IonPage, IonItem, IonItemDivider, IonItemGroup, IonLabel } from '@ionic/vue';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonItem, IonItemDivider, IonItemGroup, IonLabel } from '@ionic/vue';
 import { ref } from "vue";
 import { RestaurantLocation } from "@/models/restaurant"
+
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual'
+}
 
 const list = ref([] as RestaurantLocation[]);
 

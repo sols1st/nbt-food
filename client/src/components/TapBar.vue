@@ -46,7 +46,7 @@ const tabs: tab[] = [
     },
     {
         tab: "manage",
-        href: "/detail/1",
+        href: "/manage",
         icon: createOutline ,
         label: "管理"
     },

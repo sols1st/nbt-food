@@ -1,8 +1,17 @@
 <template>
     <ion-page mode="ios">
-        <ion-header>
+        <ion-header v-if="isLoadFinished">
             <ion-toolbar>
-                <ion-title>详情页</ion-title>
+                <ion-buttons slot="start">
+                    <ion-back-button text="返回" default-href="/list"></ion-back-button>
+                </ion-buttons>
+                <ion-title>{{ restaurant.name }}</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-header v-else>
+            <ion-toolbar>
+                <ion-title>加载中</ion-title>
+                <ion-progress-bar type="indeterminate"></ion-progress-bar>
             </ion-toolbar>
         </ion-header>
 
@@ -84,93 +93,25 @@
   
 <script setup lang="ts">
 import { ref } from 'vue';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonPage } from '@ionic/vue';
+import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonProgressBar, IonTitle, IonContent, IonPage } from '@ionic/vue';
 import CommentCard from '@/components/CommentCard.vue';
 import { Restaurant } from '@/models/restaurant';
 import { useRoute } from 'vue-router';
 import Axios from '@/utils/axios';
 const route = useRoute();
 const restaurantId = route.params.id;
+const isLoadFinished = ref(false)
 
 
 var url = "/restaurant/query/" + restaurantId
 const restaurant = ref({} as Restaurant);
 
 Axios(url, null, 'GET').then(res => {
-    console.log(res)
-    restaurant.value = res
+    restaurant.value = res as Restaurant
+    isLoadFinished.value = true
 }).catch(err => {
     console.log(err)
 })
-
-
-// const restaurant:Restaurant = {
-//     id: 1
-//     name?: string
-//     pic?: string
-//     userId?: number
-//     description?: string
-//     locationId?: number
-// }
-
-
-
-// import Axios from '@/utils/axios'
-
-
-
-
-
-// const totalStars = 5;
-// const selectedStars = ref(0);
-// const comment = ref('');
-// const comments = [
-//     {
-//         id: 1,
-//         author: 'John Doe',
-//         date: '2023-12-15',
-//         text: 'This is a great product!',
-//     },
-//     {
-//         id: 2,
-//         author: 'Jane Smith',
-//         date: '2023-12-14',
-//         text: 'I highly recommend it!',
-//     },
-// ];
-
-// const restaurant = {
-//     name: '餐馆名称',
-//     description: '餐馆描述',
-//     image: 'http://192.168.10.233:8080/api/pic/FriDec15001548CST2023.jpg',
-// };
-
-// const getStarIcon = (star: number): string => {
-//     return star <= selectedStars.value ? 'star' : 'star-outline';
-// };
-
-// const selectStars = (star: number): void => {
-//     selectedStars.value = star;
-// };
-
-// const submitComment = (): void => {
-//     if (comment.value.trim() !== '') {
-//         const newComment = {
-//             id: comments.length + 1,
-//             author: 'Anonymous',
-//             date: new Date().toISOString().split('T')[0],
-//             text: comment.value,
-//         };
-//         comments.push(newComment);
-//         comment.value = '';
-//     }
-// };
-
-// const formatDate = (dateString: string): string => {
-//     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-//     const date = new Date(dateString);
-//     return date.toLocaleDateString(undefined, options);
-// };
 </script>
   
 <style scoped>

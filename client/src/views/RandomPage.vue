@@ -19,7 +19,8 @@
                 <div>
                     <div v-if="hasRestaurant" class="flex flex-col justify-center items-center">
                         <div class="flex justify-center items-center">
-                            <img class="h-40 w-40 rounded-full" :src="restaurant?.pic" alt="">
+                            <!-- <img class="h-40 w-40 rounded-full" :src="restaurant?.pic" alt=""> -->
+                            <img class="h-40 w-40 rounded-full" src="../assets/jysb.png" alt="">
                         </div>
                         <div class="flex justify-center items-center">
                             <h1 class="text-2xl font-bold">{{ restaurant?.name }}</h1>
@@ -58,8 +59,7 @@ const getRandom = () => {
     Axios("/restaurant/random", null, "GET")
         .then((res: any) => {
             hasRestaurant.value = true
-            res.pic = "http://192.168.10.233:8080/api/pic/FriDec15001548CST2023.jpg"
-            res.description = "很好吃的地方"
+            res.pic = "../assets/jysb.jpg"
             restaurant.value = res
             console.log(restaurant.value)
         }).catch(err => {
