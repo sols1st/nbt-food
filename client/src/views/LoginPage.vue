@@ -1,44 +1,98 @@
-<script setup lang="ts">
-</script>
 <template>
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt="Your Company">
-            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">登录到你的账户
-            </h2>
-        </div>
-
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" action="#" method="POST">
-                <div>
-                    <label for="username" class="block text-sm font-medium leading-6 text-gray-900">用户名</label>
-                    <div class="mt-2">
-                        <input id="username" name="username" type="text" autocomplete="username" required
-                            class="px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    </div>
-                </div>
-
-                <div>
-                    <div class="flex items-center justify-between">
-                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">密码</label>
-                    </div>
-                    <div class="mt-2">
-                        <input id="password" name="password" type="password" autocomplete="current-password" required
-                            class="px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    </div>
-                </div>
-
-                <div>
-                    <button type="submit"
-                        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">登录
-                    </button>
-                </div>
-            </form>
-
-            <p class="mt-10 text-center text-sm text-gray-500">
-                <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">注册</a>
-            </p>
-        </div>
-    </div>
+    <ion-page mode="ios">
+        <ion-header>
+            <ion-toolbar>
+                <ion-title>个人中心</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content>
+            <div class="flex justify-center">
+                <ion-button id="open-modal" expand="block" fill="outline" style="width: calc(100% - 28px);">注册</ion-button>
+            </div>
+            <ion-button id="present-alert">登录</ion-button>
+            <ion-alert trigger="present-alert" header="登录" sub-header="请注意输入正确"  :buttons="alertButtons"
+                :inputs="alertInputs"></ion-alert>
+            <ion-modal mode="ios" ref="modal" trigger="open-modal" @willDismiss="onWillDismiss">
+                <ion-header>
+                    <ion-toolbar>
+                        <ion-buttons slot="start">
+                            <ion-button @click="cancel()">取消</ion-button>
+                        </ion-buttons>
+                        <ion-title>注册</ion-title>
+                        <ion-buttons slot="end">
+                            <ion-button @click="confirm()">确认</ion-button>
+                        </ion-buttons>
+                    </ion-toolbar>
+                </ion-header>
+                <ion-content color="light">
+                    <ion-list :inset="true">
+                        <ion-item>
+                            <ion-input label="昵称"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input label="账号"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input type="password" label="密码"></ion-input>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-modal>
+        </ion-content>
+    </ion-page>
 </template>
+  
+<script setup lang="ts">
+const modal = ref();
+const input = ref();
+const alertButtons = ['登录',{
+    text: '取消',
+    role: 'cancel',
+    cssClass: 'cancelButton'
+}];
+ const alertInputs = [
+    {
+      placeholder: '账号',
+    },
+    {
+      placeholder: '密码',
+      attributes: {
+        type: 'password',
+      }
+    }
+  ];
+
+
+const cancel = () => modal.value.$el.dismiss(null, 'cancel');
+
+const confirm = () => {
+    const name = input.value.$el.value;
+    modal.value.$el.dismiss(name, 'confirm');
+};
+
+const onWillDismiss = (ev: CustomEvent<OverlayEventDetail>) => {
+    if (ev.detail.role === 'confirm') {
+        message.value = `Hello, ${ev.detail.data}!`;
+    }
+};
+
+import { ref } from 'vue';
+import { OverlayEventDetail } from '@ionic/core/components';
+import {
+    IonPage,
+    IonContent,
+    IonButton,
+    IonButtons,
+    IonHeader,
+    IonInput,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonModal,
+    IonToggle,
+    IonToolbar,
+    IonTitle,
+    IonAlert
+} from '@ionic/vue';
+
+</script>

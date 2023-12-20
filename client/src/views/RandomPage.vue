@@ -19,7 +19,6 @@
                 <div>
                     <div v-if="hasRestaurant" class="flex flex-col justify-center items-center">
                         <div class="flex justify-center items-center">
-                            <!-- <img class="h-40 w-40 rounded-full" :src="restaurant?.pic" alt=""> -->
                             <img class="h-40 w-40 rounded-full" src="../assets/jysb.png" alt="">
                         </div>
                         <div class="flex justify-center items-center">

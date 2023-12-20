@@ -39,8 +39,8 @@ const tabs: tab[] = [
         label: "所有"
     },
     {
-        tab: "search",
-        href: "/search",
+        tab: "profile",
+        href: "/login",
         icon: personCircleOutline,
         label: "个人资料"
     },

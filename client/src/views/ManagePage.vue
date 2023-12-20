@@ -2,39 +2,30 @@
     <ion-page mode="ios">
         <ion-header>
             <ion-toolbar>
-                <ion-segment @ion-change="segmentValueChanged" :value="segmentValue">
-                    <ion-segment-button value="restaurant">
-                        <ion-label>餐馆</ion-label>
-                    </ion-segment-button>
-                    <ion-segment-button value="location">
-                        <ion-label>地点</ion-label>
-                    </ion-segment-button>
-                    <ion-segment-button value="user">
-                        <ion-label>用户</ion-label>
-                    </ion-segment-button>
-                </ion-segment>
+                <ion-title>管理页面</ion-title>
             </ion-toolbar>
         </ion-header>
-        <ion-content>
+        <ion-content color="light">
+            <ion-list :inset="true">
+                <ion-item  :router-link="'/manage/restaurant'" router-direction="forward">
+                    <ion-label>餐馆管理</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label>地点管理</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label>用户管理</ion-label>
+                </ion-item>
+            </ion-list>
         </ion-content>
     </ion-page>
 </template>
 
 
 <script setup lang="ts">
-import { IonHeader, IonLabel, IonSegment, IonSegmentButton, IonToolbar, IonContent, IonPage } from '@ionic/vue';
-import { ref } from 'vue';
-import Axios from '@/utils/axios';
-import { Restaurant } from '@/models/restaurant'
-
-var segmentValue = 'restaurant';
-
-const segmentValueChanged = () => {
-}
-
-
-
-
-
+import { IonHeader, IonLabel, IonList, IonItem, IonTitle, IonToolbar, IonContent, IonPage } from '@ionic/vue';
+// import { ref } from 'vue';
+// import Axios from '@/utils/axios';
+// import { Restaurant } from '@/models/restaurant'
 
 </script>

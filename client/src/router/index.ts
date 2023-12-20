@@ -32,13 +32,21 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/LoginPage.vue"),
       },
       {
-        path: "search",
-        component: () => import("@/views/SearchPage.vue"),
-      },
-      {
         path: "manage",
         component: () => import("@/views/ManagePage.vue"),
       },
+      {
+        path:'manage/restaurant',
+        component:()=>import('@/views/RestaurantManage.vue')
+      },
+      {
+        path:'manage/user',
+        component:()=>import('@/views/UserManage.vue')
+      },
+      {
+        path:'manage/location',
+        component:()=>import('@/views/LocationManage.vue')
+      }
     ],
   },
 ];

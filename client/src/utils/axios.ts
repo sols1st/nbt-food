@@ -3,7 +3,7 @@ import axios, { type Method } from "axios"
 
 axios.defaults.baseURL = "/api"
 
-axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded;charset=UTF-8"
+axios.defaults.headers.post["Content-Type"] = "application/json;charset=UTF-8"
 axios.defaults.timeout = 10000
 
 // const store = useAccountStore()

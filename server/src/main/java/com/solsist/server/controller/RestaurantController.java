@@ -88,13 +88,17 @@ public class RestaurantController {
     public ResponseDTO page(@RequestBody PageDTO pageDTO) {
         JSONObject param = pageDTO.getQueryParams();
         String name = param.getString("name");
-        Integer location_id = param.getIntValue("restaurant_id");
+        Integer restaurantId = param.getIntValue("restaurant_id");
+        Integer locationId = param.getIntValue("location_id");
+
+
 
         IPage<RestaurantEntity> page = restaurantService.page(
                 new Page<>(pageDTO.getCurrentPage(), pageDTO.getPageSize()),
                 Wrappers.<RestaurantEntity>lambdaQuery()
                         .like(name != null, RestaurantEntity::getName, name)
-                        .eq(location_id != 0, RestaurantEntity::getLocationId, location_id)
+                        .eq(locationId  != 0, RestaurantEntity::getLocationId, locationId)
+                        .eq(restaurantId  != 0, RestaurantEntity::getId, restaurantId)
         );
 
         return PageUtil.pageResult(page);
