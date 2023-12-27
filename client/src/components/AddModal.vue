@@ -37,7 +37,8 @@
 import { IonModal, IonSelect, IonSelectOption, IonHeader, IonToolbar, IonButton, IonButtons, IonTitle, IonContent, IonItem, IonInput, IonToast } from '@ionic/vue';
 import { ref } from "vue";
 import { OverlayEventDetail } from '@ionic/core/components';
-import { Location, Restaurant } from '@/models/restaurant';
+import { Restaurant } from '@/models/restaurant';
+import { Location } from '@/models/location';
 import Axios from '@/utils/axios';
 
 var location: Location
