@@ -21,31 +21,21 @@
     </ion-page>
 </template>
 
-<script lang="ts" setup>
-import Axios from "@/utils/axios"
+<script lang="ts"  setup>
 import { IonHeader, IonRefresher, IonRefresherContent, IonToolbar, IonTitle, IonContent, IonPage, IonItem, IonItemDivider, IonItemGroup, IonLabel } from '@ionic/vue';
 import { ref } from "vue";
 import { RestaurantLocation } from "@/models/restaurant"
-
-const handleRefresh = (event: CustomEvent) => {
-    Axios("/restaurant/list", null, "GET")
-        .then((res: any) => {
-            list.value = res;
-            (event as any).target.complete()
-        }).catch((err) => {
-            console.log(err)
-        })
-};
+import RestaurantService from "@/services/restaurant"
 
 const list = ref([] as RestaurantLocation[]);
+const handleRefresh = async (event: CustomEvent) => {
+    await getList();
+    (event as any).target.complete();
+};
 
-Axios("/restaurant/list", null, "GET")
-    .then((res: any) => {
-        list.value = res
-    }).catch((err) => {
-        console.log(err)
-    })
+const getList = async () => {
+    list.value = await RestaurantService.listRestaurantGroupByLocation();
+}
 
-
-
-</script>
+getList()
+</script>@/services/restaurant

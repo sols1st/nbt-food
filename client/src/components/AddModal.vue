@@ -1,5 +1,5 @@
-<template mode="ios">
-    <ion-modal ref="modal" trigger="add-modal" @willDismiss="onWillDismiss">
+<template>
+    <ion-modal mode="ios" :is-open="isOpen" ref="modal" trigger="add-modal" @willDismiss="onWillDismiss">
         <ion-header>
             <ion-toolbar>
                 <ion-buttons slot="start">
@@ -24,6 +24,9 @@
             <ion-item>
                 <ion-input label="餐馆描述" v-model="restaurantDescription" label-placement="start" type="text"></ion-input>
             </ion-item>
+            <ion-button @click="test()">
+
+            </ion-button>
         </ion-content>
     </ion-modal>
     <ion-toast :message="toastMessage" :is-open="isToastOpen" :duration="5000"
@@ -41,15 +44,14 @@ var location: Location
 var restaurantName: string
 var restaurantDescription: string
 
+
 const props = defineProps<{
-    restaurant: Restaurant
     isModify: boolean
+    isOpen: boolean
 }>()
 
-if (props.isModify == true) {
-    console.log("yes")
-} else {
-    console.log("no")
+const test = () => {
+    console.log(props.isModify)
 }
 
 const modal = ref();
@@ -67,7 +69,9 @@ Axios("/location/list", null, "GET").then(res => {
     console.log(err)
 })
 
-const cancel = () => modal.value.$el.dismiss(null, 'cancel');
+const cancel = () => {
+    modal.value.$el.dismiss(null, 'cancel');
+}
 const confirm = async () => {
     const restaurant: Restaurant = {
         name: restaurantName,

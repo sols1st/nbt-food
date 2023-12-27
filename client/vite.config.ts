@@ -39,6 +39,8 @@ export default defineConfig({
     proxy: {
       "/api": {
         target: "http://localhost:8080", // 后端服务器的URL
+        // target: "http://10.89.193.12:8080",
+
         changeOrigin: true,
         pathRewrite: {
           "^/api": "/api", // 将/api前缀重写为/api

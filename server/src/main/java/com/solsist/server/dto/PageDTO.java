@@ -9,5 +9,5 @@ import com.alibaba.fastjson2.JSONObject;
 public class PageDTO {
     private int currentPage;
     private int pageSize;
-    private JSONObject queryParams;
+    public JSONObject queryParams;
 }
