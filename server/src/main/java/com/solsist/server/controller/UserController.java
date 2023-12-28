@@ -104,5 +104,15 @@ public class UserController {
         }
     }
 
+    @PostMapping("/add")
+    public ResponseDTO add(@RequestBody UserEntity userEntity) {
+        boolean save = userService.save(userEntity);
+        if (save) {
+            return ResponseDTO.ok("添加成功");
+        } else {
+            return ResponseDTO.fail("添加失败");
+        }
+    }
+
 
 }

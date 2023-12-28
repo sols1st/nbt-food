@@ -1,6 +1,7 @@
 package com.solsist.server.controller;
 
 import com.alibaba.fastjson2.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -9,6 +10,7 @@ import com.solsist.server.dto.ResponseDTO;
 import com.solsist.server.entity.LocationEntity;
 import com.solsist.server.entity.RestaurantEntity;
 import com.solsist.server.service.LocationService;
+import com.solsist.server.service.RestaurantService;
 import com.solsist.server.util.PageUtil;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,8 @@ public class LocationController {
 
     @Resource
     private LocationService locationService;
+    @Resource
+    private RestaurantService restaurantService;
 
     /**
      * 获取所有location
@@ -80,6 +84,14 @@ public class LocationController {
      */
     @DeleteMapping("delete/{id}")
     public ResponseDTO delete(@PathVariable("id") Integer id) {
+        QueryWrapper<RestaurantEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("location_id", id);
+        long count = restaurantService.count(queryWrapper);
+
+        if (count > 0) {
+            return ResponseDTO.fail("删除失败，存在依赖项");
+        }
+
         boolean remove = locationService.removeById(id);
         if (remove) {
             return ResponseDTO.ok("删除成功");

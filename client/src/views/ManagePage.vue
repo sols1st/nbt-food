@@ -7,13 +7,13 @@
         </ion-header>
         <ion-content color="light">
             <ion-list :inset="true">
-                <ion-item  :router-link="'/manage/restaurant'" router-direction="forward">
+                <ion-item :router-link="'/manage/restaurant'" router-direction="forward">
                     <ion-label>餐馆管理</ion-label>
                 </ion-item>
-                <ion-item>
+                <ion-item :router-link="'/manage/location'" router-direction="forward">
                     <ion-label>地点管理</ion-label>
                 </ion-item>
-                <ion-item>
+                <ion-item :router-link="'/manage/user'" router-direction="forward">
                     <ion-label>用户管理</ion-label>
                 </ion-item>
             </ion-list>
@@ -24,8 +24,4 @@
 
 <script setup lang="ts">
 import { IonHeader, IonLabel, IonList, IonItem, IonTitle, IonToolbar, IonContent, IonPage } from '@ionic/vue';
-// import { ref } from 'vue';
-// import Axios from '@/utils/axios';
-// import { Restaurant } from '@/models/restaurant'
-
 </script>

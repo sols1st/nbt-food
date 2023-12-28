@@ -68,7 +68,12 @@ axios.interceptors.response.use(
   }
 );
 
-export default function Axios(url: string, data: any, method: Method) {
+export default function Axios(
+  url: string,
+  data: any,
+  method: Method,
+  toast: boolean = true
+) {
   return new Promise((resolve, reject) => {
     if (method === "get") {
       axios({
@@ -78,10 +83,11 @@ export default function Axios(url: string, data: any, method: Method) {
       })
         .then((res) => {
           if (res.data.code === 200) {
+            if (toast) Toast(res.data.msg);
             resolve(res.data.data);
           } else {
-            Toast(res.data.message);
-            reject(res.data.message);
+            Toast(res.data.msg);
+            reject(res.data.msg);
           }
         })
         .catch((err) => {
@@ -95,10 +101,11 @@ export default function Axios(url: string, data: any, method: Method) {
       })
         .then((res) => {
           if (res.data.code === 200) {
+            if (toast) Toast(res.data.msg);
             resolve(res.data.data);
           } else {
-            Toast(res.data.message);
-            reject(res.data.message);
+            Toast(res.data.msg);
+            reject(res.data.msg);
           }
         })
         .catch((err) => {

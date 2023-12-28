@@ -128,7 +128,6 @@ const cancel = () => {
     isModalOpen.value = false;
 }
 
-// to add userId
 const confirm = async () => {
     switch (modalType) {
         case ModalType.Add:

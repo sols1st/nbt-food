@@ -106,7 +106,7 @@ const isLoadFinished = ref(false)
 var url = "/restaurant/query/" + restaurantId
 const restaurant = ref({} as Restaurant);
 
-Axios(url, null, 'GET').then(res => {
+Axios(url, null, 'GET',false).then(res => {
     restaurant.value = res as Restaurant
     isLoadFinished.value = true
 }).catch(err => {

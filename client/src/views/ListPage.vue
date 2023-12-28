@@ -38,4 +38,4 @@ const getList = async () => {
 }
 
 getList()
-</script>@/services/restaurant
+</script>

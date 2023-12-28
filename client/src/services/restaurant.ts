@@ -1,36 +1,26 @@
 import Axios from "@/utils/axios";
 import { Restaurant, RestaurantLocation } from "@/models/restaurant";
 import {RestaurantPage} from "@/models/page";
-import Toast from "@/utils/toast";
 
 const RestaurantService = {
   async listRestaurantGroupByLocation() {
-    const res = await Axios("/restaurant/list", null, "GET");
-    return res as RestaurantLocation[];
+    return await Axios("/restaurant/list", null, "GET",false) as RestaurantLocation[];
   },
   async addRestaurant(r: Restaurant) {
-    const res = await Axios("/restaurant/add", r, "post") as string
-    Toast(res)
-    return res
+    return await Axios("/restaurant/add", r, "post") as string
   },
   async removeRestaurant(r: Restaurant) {
-    const res = await Axios("/restaurant/delete/" + r.id, null, "delete") as string
-    Toast(res)
-    return res
+    return await Axios("/restaurant/delete/" + r.id, null, "delete") as string
   },
   async updateRestaurant(r: Restaurant) {
-    const res = await Axios("/restaurant/update", r, "put") as string
-    Toast(res)
-    return res
+    return await Axios("/restaurant/update", r, "put") as string
   },
   // 分页条件查询
   async pageRestaurant(body:RestaurantPage) {
-    const res = await Axios("/restaurant/page", body, "post") as Restaurant[]
-    return res
+    return await Axios("/restaurant/page", body, "post",false) as Restaurant[]
   },
   async randomRestaurant() {
-    const res = await Axios("/restaurant/random", null, "GET") as Restaurant
-    return res
+    return await Axios("/restaurant/random", null, "GET",false) as Restaurant
   }
 };
 
