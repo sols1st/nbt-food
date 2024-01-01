@@ -4,6 +4,9 @@
             <ion-toolbar>
                 <ion-title>所有餐馆</ion-title>
             </ion-toolbar>
+            <ion-toolbar>
+                <ion-searchbar></ion-searchbar>
+            </ion-toolbar>
         </ion-header>
         <ion-content>
             <ion-refresher slot="fixed" @ionRefresh="handleRefresh($event)">
@@ -22,7 +25,7 @@
 </template>
 
 <script lang="ts"  setup>
-import { IonHeader, IonRefresher, IonRefresherContent, IonToolbar, IonTitle, IonContent, IonPage, IonItem, IonItemDivider, IonItemGroup, IonLabel } from '@ionic/vue';
+import { IonHeader, IonRefresher,IonSearchbar, IonRefresherContent, IonToolbar, IonTitle, IonContent, IonPage, IonItem, IonItemDivider, IonItemGroup, IonLabel } from '@ionic/vue';
 import { ref } from "vue";
 import { RestaurantLocation } from "@/models/restaurant"
 import RestaurantService from "@/services/restaurant"

@@ -5,11 +5,17 @@ import TabBar from "@/components/TapBar.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
+    name: "list",
     redirect: "/list",
   },
   {
     path: "/detail/:id",
     component: () => import("@/views/DetailPage.vue"),
+  },
+  {
+    path: "/callback",
+    name: "callback",
+    component: ()=> import("@/views/CallbackView.vue"),
   },
   {
     path: "/",
@@ -36,17 +42,17 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/ManagePage.vue"),
       },
       {
-        path:'manage/restaurant',
-        component:()=>import('@/views/RestaurantManage.vue')
+        path: "manage/restaurant",
+        component: () => import("@/views/RestaurantManage.vue"),
       },
       {
-        path:'manage/user',
-        component:()=>import('@/views/UserManage.vue')
+        path: "manage/user",
+        component: () => import("@/views/UserManage.vue"),
       },
       {
-        path:'manage/location',
-        component:()=>import('@/views/LocationManage.vue')
-      }
+        path: "manage/location",
+        component: () => import("@/views/LocationManage.vue"),
+      },
     ],
   },
 ];

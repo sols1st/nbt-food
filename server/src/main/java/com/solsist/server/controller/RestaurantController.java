@@ -13,6 +13,10 @@ import com.solsist.server.service.RestaurantService;
 import com.solsist.server.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import com.alibaba.fastjson2.JSONObject;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -36,6 +40,9 @@ public class RestaurantController {
      * @return ResponseDTO
      */
 
+
+
+    @PreAuthorize("hasAuthority('SCOPE_admin')")
     @GetMapping("list")
     public ResponseDTO list() {
         List<RestaurantEntity> list = restaurantService.list();
@@ -110,6 +117,8 @@ public class RestaurantController {
      * @param restaurantEntity 餐馆实体
      * @return 添加结果
      */
+
+
     @PostMapping("add")
     public ResponseDTO add(@RequestBody RestaurantEntity restaurantEntity) {
         boolean save = restaurantService.save(restaurantEntity);

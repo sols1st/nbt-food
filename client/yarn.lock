@@ -1131,6 +1131,41 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@logto/browser@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.npmmirror.com/@logto/browser/-/browser-2.2.1.tgz#82abf90ea88240f6b665e362298c72243227e64e"
+  integrity sha512-SooFjYxWUALzHflqVMM11OfNKOA/6NUAj35Me/galRCFKHYA6xotjI92UrGr3mUjZg5SIh/Sm3TEDHH8HrzHVw==
+  dependencies:
+    "@logto/client" "^2.3.1"
+    "@silverhand/essentials" "^2.6.2"
+    js-base64 "^3.7.4"
+
+"@logto/client@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.npmmirror.com/@logto/client/-/client-2.3.1.tgz#fd81ca91ed95c5faaca930c665bfc9f000b35c3c"
+  integrity sha512-LNNnMYLy9372T6EqWlEHqUSl16r4si897fZkehCv8zEY4DPD3fpZAp348/hC8ifNTL3NEZUuOQsjP/fF6fImbA==
+  dependencies:
+    "@logto/js" "^3.0.0"
+    "@silverhand/essentials" "^2.6.2"
+    camelcase-keys "^7.0.1"
+    jose "^5.0.0"
+
+"@logto/js@^3.0.0":
+  version "3.0.1"
+  resolved "https://registry.npmmirror.com/@logto/js/-/js-3.0.1.tgz#085e1aa6a1529d2665162dba8c9785932c06575c"
+  integrity sha512-vsU6mH5oiiW3k00pMyVA4V31K2Bd0rOT9qWch2l5e5o1yCQLJ3zUIOjGjChu3m2TRu1d920iiUpZU3Lzf6Pwdw==
+  dependencies:
+    "@silverhand/essentials" "^2.6.2"
+    camelcase-keys "^7.0.1"
+    jose "^5.0.0"
+
+"@logto/vue@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.npmmirror.com/@logto/vue/-/vue-2.1.1.tgz#6c1dda455794a41fcf1ec110027c97f3dc5b0066"
+  integrity sha512-IYN8qf5DRbXAtXiUygdMUgCZwh0jiBwD+8eXBZ6Y6fyfzmiOMGpUCxtB1K12NWT9TWcA4PCejNpxBfVbF9fe7Q==
+  dependencies:
+    "@logto/browser" "^2.2.1"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.npmmirror.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
@@ -1253,6 +1288,11 @@
   version "4.8.0"
   resolved "https://registry.npmmirror.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.8.0.tgz"
   integrity sha512-kb4/auKXkYKqlUYTE8s40FcJIj5soOyRLHKd4ugR0dCq0G2EfcF54eYcfQiGkHzjidZ40daB4ulsFdtqNKZtBg==
+
+"@silverhand/essentials@^2.6.2":
+  version "2.8.6"
+  resolved "https://registry.npmmirror.com/@silverhand/essentials/-/essentials-2.8.6.tgz#78b3a025f0c2165bd41ad19cdce56c07c98a69e5"
+  integrity sha512-qNyc6CvZRngP66hTA8sbpXGsiu9j6Hu62jCy7LV3tJiytg/hmxJB5oM9k5tpaUa9kHwYJ2X9CManX7SYYNrzHg==
 
 "@stencil/core@^4.0.3", "@stencil/core@^4.8.1":
   version "4.8.2"
@@ -1635,6 +1675,21 @@ camelcase-css@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmmirror.com/camelcase-css/-/camelcase-css-2.0.1.tgz"
   integrity sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==
+
+camelcase-keys@^7.0.1:
+  version "7.0.2"
+  resolved "https://registry.npmmirror.com/camelcase-keys/-/camelcase-keys-7.0.2.tgz#d048d8c69448745bb0de6fc4c1c52a30dfbe7252"
+  integrity sha512-Rjs1H+A9R+Ig+4E/9oyB66UC5Mj9Xq3N//vcLf2WzgdTi/3gUu3Z9KoqmlrEG4VuuLK8wJHofxzdQXz/knhiYg==
+  dependencies:
+    camelcase "^6.3.0"
+    map-obj "^4.1.0"
+    quick-lru "^5.1.1"
+    type-fest "^1.2.1"
+
+camelcase@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.npmmirror.com/camelcase/-/camelcase-6.3.0.tgz#5685b95eb209ac9c0c177467778c9c84df58ba9a"
+  integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
 caniuse-lite@^1.0.30001538, caniuse-lite@^1.0.30001565:
   version "1.0.30001568"
@@ -2381,6 +2436,16 @@ jiti@^1.19.1:
   resolved "https://registry.npmmirror.com/jiti/-/jiti-1.21.0.tgz"
   integrity sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==
 
+jose@^5.0.0:
+  version "5.2.0"
+  resolved "https://registry.npmmirror.com/jose/-/jose-5.2.0.tgz#d0ffd7f7e31253f633eefb190a930cd14a916995"
+  integrity sha512-oW3PCnvyrcm1HMvGTzqjxxfnEs9EoFOFWi2HsEGhlFVOXxTE3K9GKWVMFoFw06yPUqwpvEWic1BmtUZBI/tIjw==
+
+js-base64@^3.7.4:
+  version "3.7.5"
+  resolved "https://registry.npmmirror.com/js-base64/-/js-base64-3.7.5.tgz#21e24cf6b886f76d6f5f165bfcd69cc55b9e3fca"
+  integrity sha512-3MEt5DTINKqfScXKfJFrRbxkrnk2AxPWGBL/ycjz4dK8iqiSJ06UxD8jh8xuh6p10TX4t2+7FsBYVxxQbMg+qA==
+
 js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmmirror.com/js-tokens/-/js-tokens-4.0.0.tgz"
@@ -2487,6 +2552,11 @@ magic-string@^0.30.5:
   integrity sha512-7xlpfBaQaP/T6Vh8MO/EqXSW5En6INHEvEXQiuff7Gku0PWjU3uf6w/j9o7O+SpB5fOAkrI5HeoNgwjEO0pFsA==
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.15"
+
+map-obj@^4.1.0:
+  version "4.3.0"
+  resolved "https://registry.npmmirror.com/map-obj/-/map-obj-4.3.0.tgz#9304f906e93faae70880da102a9f1df0ea8bb05a"
+  integrity sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==
 
 merge-stream@^2.0.0:
   version "2.0.0"
@@ -2660,14 +2730,19 @@ pify@^2.3.0:
 
 pinia-plugin-persist@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.npmmirror.com/pinia-plugin-persist/-/pinia-plugin-persist-1.0.0.tgz"
+  resolved "https://registry.npmmirror.com/pinia-plugin-persist/-/pinia-plugin-persist-1.0.0.tgz#fc696f225527f30bd5955109fafadd43c725e888"
   integrity sha512-M4hBBd8fz/GgNmUPaaUsC29y1M09lqbXrMAHcusVoU8xlQi1TqgkWnnhvMikZwr7Le/hVyMx8KUcumGGrR6GVw==
   dependencies:
     vue-demi "^0.12.1"
 
+pinia-plugin-persistedstate@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.npmmirror.com/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-3.2.1.tgz#66780602aecd6c7b152dd7e3ddc249a1f7a13fe5"
+  integrity sha512-MK++8LRUsGF7r45PjBFES82ISnPzyO6IZx3CH5vyPseFLZCk1g2kgx6l/nW8pEBKxxd4do0P6bJw+mUSZIEZUQ==
+
 pinia@^2.1.7:
   version "2.1.7"
-  resolved "https://registry.npmmirror.com/pinia/-/pinia-2.1.7.tgz"
+  resolved "https://registry.npmmirror.com/pinia/-/pinia-2.1.7.tgz#4cf5420d9324ca00b7b4984d3fbf693222115bbc"
   integrity sha512-+C2AHFtcFqjPih0zpYuvof37SFxMQ7OEG2zV9jRI12i9BOy3YQVAHwdKtyyc8pDcDyIc33WCIsZaCFWU7WWxGQ==
   dependencies:
     "@vue/devtools-api" "^6.5.0"
@@ -2772,6 +2847,11 @@ queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.npmmirror.com/queue-microtask/-/queue-microtask-1.2.3.tgz"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
+
+quick-lru@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.npmmirror.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
+  integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
 randombytes@^2.1.0:
   version "2.1.0"
@@ -3198,6 +3278,11 @@ type-fest@^0.16.0:
   version "0.16.0"
   resolved "https://registry.npmmirror.com/type-fest/-/type-fest-0.16.0.tgz"
   integrity sha512-eaBzG6MxNzEn9kiwvtre90cXaNLkmadMWa1zQMs3XORCXNbsH/OewwbxC5ia9dCxIxnTAsSxXJaa/p5y8DlvJg==
+
+type-fest@^1.2.1:
+  version "1.4.0"
+  resolved "https://registry.npmmirror.com/type-fest/-/type-fest-1.4.0.tgz#e9fb813fe3bf1744ec359d55d1affefa76f14be1"
+  integrity sha512-yGSza74xk0UG8k+pLh5oeoYirvIiWo5t0/o3zHHAO2tRDiZcxWP7fywNlXhqb6/r6sWvwi+RsyQMWhVLe4BVuA==
 
 typed-array-buffer@^1.0.0:
   version "1.0.0"
