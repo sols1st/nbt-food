@@ -9,8 +9,8 @@
 
 ## 技术栈
 ### 前端
-Vue3 + Typescript + Tailwind + [Ionic](https://ionicframework.com/docs/)
+Vue3 + Vite + Typescript + Tailwind + [Ionic](https://ionicframework.com/docs/)
 
 ### 后端
-Java + Spring Boot + Mybatis-Plus
+Spring Boot + Mybatis-Plus
 
