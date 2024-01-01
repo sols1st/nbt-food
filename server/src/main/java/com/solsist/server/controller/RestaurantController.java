@@ -42,7 +42,6 @@ public class RestaurantController {
 
 
 
-    @PreAuthorize("hasAuthority('SCOPE_admin')")
     @GetMapping("list")
     public ResponseDTO list() {
         List<RestaurantEntity> list = restaurantService.list();

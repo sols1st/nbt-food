@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "pinia": "^2.1.7",
-    "pinia-persist-plugin": "^1.0.3"
-  }
-}

@@ -47,10 +47,11 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable();
         http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt).cors().and()
                 .authorizeRequests(customizer -> customizer
                         // Only authenticated requests can access your protected APIs
-                        .mvcMatchers("/", "/secret", "/restaurant/*").authenticated()
+                        .mvcMatchers("/", "/secret").authenticated()
 //                        .mvcMatchers().hasAuthority("SCOPE_admin")
                         // Anyone can access the public profile.
                         .mvcMatchers("/profile").permitAll()
