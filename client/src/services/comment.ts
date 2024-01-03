@@ -6,6 +6,9 @@ const CommentService = {
   async addComment(c: Comment) {
     return (await Axios("/comment/add", c, "post")) as string;
   },
+  async restaurantScore(restaurantId: number) {
+    return (await Axios("/comment/queryScore/" + restaurantId, null, "get",false)) as number;
+  },
   async removeComment(c: Comment) {
     return (await Axios("/comment/delete/" + c.id, null, "delete")) as string;
   },

@@ -16,12 +16,18 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author solsist
  * @since 2024-01-01
  */
 @Service
-        public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentEntity> implements CommentService {
-        }
+public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentEntity> implements CommentService {
+    @Resource
+    CommentMapper commentMapper;
+
+    public Double getAverageScore(Integer restaurantId) {
+        return commentMapper.getAverageScore(restaurantId);
+    }
+}

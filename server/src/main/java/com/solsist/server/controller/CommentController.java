@@ -27,17 +27,17 @@ public class CommentController {
     private LocationService locationService;
 
     /**
-     * 通过id查询单个餐馆
+     * 通过id查询单个评论的分数
      *
      * @return ResponseDTO
      */
-    @GetMapping("query/{id}")
+    @GetMapping("queryScore/{id}")
     public ResponseDTO query(@PathVariable("id") Integer id) {
-        CommentEntity comment = commentService.getById(id);
-        if (comment != null) {
-            return ResponseDTO.ok(comment);
+        Double averageScore = commentService.getAverageScore(id);
+        if (averageScore != null) {
+            return ResponseDTO.ok(averageScore);
         } else {
-            return ResponseDTO.fail(404, "没有找到对应餐馆");
+            return ResponseDTO.ok(0);
         }
 
     }

@@ -60,6 +60,10 @@
                         <ion-input label="餐馆描述" v-model="modalData.description" label-placement="start"
                             type="text"></ion-input>
                     </ion-item>
+                    <ion-item @click="postPic()">
+                        <ion-label>餐馆图片</ion-label>
+                        <ion-img class="w-[200px] h-[200px]" :src="modalData.pic"></ion-img>
+                    </ion-item>
                 </ion-content>
             </ion-modal>
         </ion-content>
@@ -72,7 +76,9 @@ import LocationService from "@/services/location"
 import { ref } from "vue";
 import { RestaurantLocation, Restaurant } from "@/models/restaurant"
 import { Location } from "@/models/location"
-import { IonModal, IonInput, IonSelect, IonSelectOption, IonButton, IonHeader, IonList, IonRefresher, IonRefresherContent, IonItemGroup, IonItemDivider, IonItemSliding, IonItem, IonItemOption, IonItemOptions, IonLabel, IonTitle, IonToolbar, IonButtons, IonBackButton, IonContent, IonPage } from '@ionic/vue';
+import { IonModal, IonInput, IonSelect, IonImg, IonSelectOption, IonButton, IonHeader, IonList, IonRefresher, IonRefresherContent, IonItemGroup, IonItemDivider, IonItemSliding, IonItem, IonItemOption, IonItemOptions, IonLabel, IonTitle, IonToolbar, IonButtons, IonBackButton, IonContent, IonPage } from '@ionic/vue';
+import { Camera, CameraResultType } from '@capacitor/camera';
+
 
 // Modal
 enum ModalType { Add, Modify }
@@ -80,6 +86,20 @@ const locationList = ref([] as Location[])
 const getLocationList = async () => {
     locationList.value = await LocationService.listLocation();
 }
+
+const postPic = async () => {
+  const image = await Camera.getPhoto({
+    quality: 90,
+    allowEditing: true,
+    resultType: CameraResultType.Uri
+  });
+
+  var imageUrl = image.webPath;
+
+  // Can be set to the src of an image now
+  modalData.pic = imageUrl;
+};
+
 const openModal = (type: ModalType, r: Restaurant | null) => {
     getLocationList()
     switch (type) {
@@ -112,7 +132,7 @@ var modalData: ModalData = {
     description: '',
     locationName: '',
     locationId: 0,
-    pic: ''
+    pic: 'http://localhost:8080/api/pic/pic.jpg'
 }
 
 var modalType: ModalType

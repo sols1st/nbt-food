@@ -57,8 +57,9 @@
                 <div class="flex items-center gap-[16px] self-stretch">
                     <div class="flex flex-col justify-center items-center gap-[4px]">
                         <div class="flex items-start">
-                            <a
-                                class=" text-rateColor-light-rate text-[60px] font-bold leading-[48px] tracking-[-1.8px]">4.7</a>
+                            <a v-if="score!=0" class=" text-rateColor-light-rate text-[60px] font-bold leading-[48px] tracking-[-1.8px]">{{
+                                score }}</a>
+                            <a v-else class=" text-rateColor-light-rate text-[20px] font-bold leading-[20px] mb-[10px] tracking-[-1.8px]">暂无评分</a>
                         </div>
                         <div class="flex items-start">
                             <a
@@ -76,8 +77,8 @@
                             class="text-rateColor-light-label text-[14px] font-medium tracking-wider">轻点评分：</a>
                     </div>
                     <div class="flex items-start gap-[20px]">
-                        <svg class="w-[24px] h-[23px]" v-for="_ in [1, 1, 1, 1, 1]" xmlns="http://www.w3.org/2000/svg"
-                            width="26" height="25" viewBox="0 0 26 25" fill="none">
+                        <svg class="w-[24px] h-[23px]" @click="postComment(item)" v-for="item in [1, 2, 3, 4, 5]"
+                            xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
                             <path d="M9.5 8.5L13 1L16.5 8.5H25L18.5 15L20.5 24L13 19L5.5 24L7.5 15L1 8.5H9.5Z"
                                 stroke="#377CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
@@ -85,8 +86,9 @@
                 </div>
                 <div class="flex flex-col w-[100%] self-center gap-[14px] mb-[20px]">
                     <CommentCard :content="item.content" :user-name="item.userName" :time="item.gmtCreate"
-                        v-for="item in comments"></CommentCard>
-                    <a v-if="!hasComment" class="text-rateColor-light-label text-[14px] font-medium tracking-wider self-center mt-[60px]">暂无评论</a>
+                        v-for="item in comments" :score="item.score"></CommentCard>
+                    <a v-if="!hasComment"
+                        class="text-rateColor-light-label text-[14px] font-medium tracking-wider self-center mt-[60px]">暂无评论</a>
                 </div>
             </div>
         </ion-content>
@@ -110,10 +112,15 @@ const route = useRoute();
 const restaurantId = route.params.id as string;
 const isLoadFinished = ref(false)
 const hasComment = ref(false)
+const score = ref(0)
 
 
 const restaurant = ref({} as Restaurant);
 const comments = ref([] as Comment[]);
+
+const postComment = async (score: any) => {
+    console.log(score)
+}
 
 const getDetail = async () => {
     restaurant.value = await RestaurantService.queryRestaurant(restaurantId);
@@ -125,6 +132,7 @@ const getDetail = async () => {
         }
     }
     const res = await CommentService.pageComment(page)
+    score.value = await CommentService.restaurantScore(restaurant.value.id as number)
     hasComment.value = res.totalRecords > 0
     comments.value = res.records
     isLoadFinished.value = true
