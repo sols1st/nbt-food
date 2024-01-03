@@ -94,8 +94,8 @@ public class RestaurantController {
     public ResponseDTO page(@RequestBody PageDTO pageDTO) {
         JSONObject param = pageDTO.getQueryParams();
         String name = param.getString("name");
-        Integer restaurantId = param.getIntValue("restaurant_id");
-        Integer locationId = param.getIntValue("location_id");
+        Integer restaurantId = param.getIntValue("restaurantId");
+        Integer locationId = param.getIntValue("locationId");
 
 
 

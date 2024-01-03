@@ -11,6 +11,9 @@
     },
     "allowJs": true,
 
+    "esModuleInterop": true,
+    "types": ["node"],
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,

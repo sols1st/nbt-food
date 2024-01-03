@@ -15,7 +15,7 @@
             </ion-toolbar>
         </ion-header>
 
-        <ion-content>
+        <ion-content v-if="isLoadFinished">
             <div class="flex flex-col px-[20px] pt-[20px] items-start gap-[20px] self-stretch">
                 <div class="flex items-start gap-[16px] self-stretch">
                     <div style="border: 1px solid rgba(0, 0, 0, 0.25);"
@@ -84,9 +84,14 @@
                     </div>
                 </div>
                 <div class="flex flex-col w-[100%] self-center gap-[14px] mb-[20px]">
-                    <CommentCard v-for="_ in [1, 2, 3]"></CommentCard>
+                    <CommentCard :content="item.content" :user-name="item.userName" :time="item.gmtCreate"
+                        v-for="item in comments"></CommentCard>
+                    <a v-if="!hasComment" class="text-rateColor-light-label text-[14px] font-medium tracking-wider self-center mt-[60px]">暂无评论</a>
                 </div>
             </div>
+        </ion-content>
+        <ion-content v-else>
+
         </ion-content>
     </ion-page>
 </template>
@@ -96,24 +101,38 @@ import { ref } from 'vue';
 import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonProgressBar, IonTitle, IonContent, IonPage } from '@ionic/vue';
 import CommentCard from '@/components/CommentCard.vue';
 import { Restaurant } from '@/models/restaurant';
+import RestaurantService from '@/services/restaurant';
+import { Comment } from '@/models/comment';
+import CommentService from '@/services/comment';
 import { useRoute } from 'vue-router';
-import Axios from '@/utils/axios';
+import { CommentPage } from '@/models/page';
 const route = useRoute();
-const restaurantId = route.params.id;
+const restaurantId = route.params.id as string;
 const isLoadFinished = ref(false)
+const hasComment = ref(false)
 
 
-var url = "/restaurant/query/" + restaurantId
 const restaurant = ref({} as Restaurant);
+const comments = ref([] as Comment[]);
 
-Axios(url, null, 'GET',false).then(res => {
-    restaurant.value = res as Restaurant
+const getDetail = async () => {
+    restaurant.value = await RestaurantService.queryRestaurant(restaurantId);
+    const page: CommentPage = {
+        currentPage: 1,
+        pageSize: 10,
+        queryParams: {
+            restaurantId: eval(restaurantId)
+        }
+    }
+    const res = await CommentService.pageComment(page)
+    hasComment.value = res.totalRecords > 0
+    comments.value = res.records
     isLoadFinished.value = true
-}).catch(err => {
-    console.log(err)
-})
+}
+getDetail()
+
+
+
 </script>
   
-<style scoped>
-/* Customize styles as needed */
-</style>
+<style scoped></style>

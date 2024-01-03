@@ -19,6 +19,9 @@ const RestaurantService = {
   async pageRestaurant(body:RestaurantPage) {
     return await Axios("/restaurant/page", body, "post",false) as Restaurant[]
   },
+  async queryRestaurant(id:string) {
+    return await Axios("/restaurant/query/"+id, null, "get",false) as Restaurant
+  },
   async randomRestaurant() {
     return await Axios("/restaurant/random", null, "GET",false) as Restaurant
   }

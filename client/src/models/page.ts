@@ -1,7 +1,7 @@
 interface Page<T> {
-  currentPage?: number;
-  pageSize?: number;
-  queryParams?: T;
+  currentPage: number;
+  pageSize: number;
+  queryParams: T;
 }
 
 interface RestaurantPage
@@ -11,4 +11,10 @@ interface RestaurantPage
     locationId?: number;
   }> {}
 
-export type { RestaurantPage };
+interface CommentPage
+  extends Page<{
+    id?: number;
+    restaurantId?: number;
+  }> {}
+
+export type { RestaurantPage,CommentPage };

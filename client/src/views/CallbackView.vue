@@ -1,21 +1,22 @@
 <script setup lang="ts">
-import { useHandleSignInCallback } from '@logto/vue';
-import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { useLogto } from "@logto/vue";
-const { signIn, isAuthenticated } = useLogto();
-const router = useRouter()
-const { isLoading } = useHandleSignInCallback(() => {
-    // Navigate to root path when finished
-});
+import { useLogto, UserInfoResponse, useHandleSignInCallback } from "@logto/vue";
+import { useAccountStore } from "@/stores/account"
+const { isAuthenticated, getAccessToken, fetchUserInfo } = useLogto();
 
-onMounted(() => {
-    if (isAuthenticated)
+
+const store = useAccountStore()
+const router = useRouter()
+const { isLoading } = useHandleSignInCallback(async () => {
+    if (isAuthenticated) {
+        const token = await getAccessToken("https://food.app.nbtca.space")
+        store.token = token as string
+        store.account = await fetchUserInfo() as UserInfoResponse
         router.push("/login")
-})
+    }
+});
 </script>
 
 <template>
-    <!-- When it's working in progress -->
     <p v-if="isLoading">Redirecting...</p>
 </template>

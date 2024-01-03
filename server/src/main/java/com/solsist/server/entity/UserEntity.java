@@ -25,7 +25,7 @@ public class UserEntity {
     private String nickname;
 
     @TableField(value = "role_id")
-    private Integer role_id ;
+    private Integer roleId;
 
     @TableField(value = "avatar")
     private String avatar;

@@ -14,9 +14,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableAspectJAutoProxy
 @MapperScan("com.solsist.server.mapper")
 public class ServerApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(ServerApplication.class, args);
     }
-
 }

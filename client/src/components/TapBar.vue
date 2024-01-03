@@ -17,6 +17,11 @@
 <script setup lang="ts">
 import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonLabel, IonIcon } from '@ionic/vue';
 import { fastFoodOutline, createOutline, diceOutline, personCircleOutline } from 'ionicons/icons';
+import { decodeAccessToken } from '@logto/js'
+import { useAccountStore } from '@/stores/account';
+
+const store = useAccountStore()
+const scoop = decodeAccessToken(store.token).scope
 
 interface tab {
     tab: string,
@@ -24,6 +29,7 @@ interface tab {
     icon: string,
     label: string
 }
+
 
 const tabs: tab[] = [
     {
@@ -44,12 +50,15 @@ const tabs: tab[] = [
         icon: personCircleOutline,
         label: "个人资料"
     },
-    {
+]
+
+if (scoop === "admin") {
+    tabs.push({
         tab: "manage",
         href: "/manage",
-        icon: createOutline ,
+        icon: createOutline,
         label: "管理"
-    },
-]
+    })
+}
 
 </script>

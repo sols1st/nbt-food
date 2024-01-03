@@ -1,13 +1,17 @@
 <script setup lang="ts">
+// import { ref } from "vue";
+// import { Comment } from '@/models/comment';
+const props = defineProps(['title','content','time','userName'])
 </script>
 <template>
-    <div class="rounded-[8px]  bg-systemBackground-lightSecondary flex py-[12px] px-[20px] flex-col items-start gap-[16px] min-h-[150px]">
+    <div
+        class="rounded-[8px]  bg-systemBackground-lightSecondary flex py-[12px] px-[20px] flex-col items-start gap-[16px] min-h-[150px]">
         <div class="flex flex-col items-start gap-[8px] w-full">
             <div class="flex items-start gap-[16px] self-stretch">
                 <div class="flex flex-col items-start gap-[2px] flex-grow">
                     <div class="flex flex-col items-center self-stretch">
                         <a style="font-family: SF Pro Text;"
-                            class="self-stretch text-textBlack-light text-[12px] font-semibold leading-[16px] tracking-wider">非常好吃</a>
+                            class="self-stretch text-textBlack-light text-[12px] font-semibold leading-[16px] tracking-wider">{{ props.title }}</a>
                     </div>
                     <div class="flex items-center gap-[3px]">
                         <svg v-for="_ in [1, 1, 1, 1, 1]" class="w-[11.5px] h-[11.5px]" xmlns="http://www.w3.org/2000/svg"
@@ -27,18 +31,18 @@
                 </div>
                 <div class="flex flex-col items-end gap-[4px]">
                     <div class="flex flex-col items-center">
-                        <a class="text-systemGrey-light text-right text-[12px] font-normal">11月23日</a>
+                        <a class="text-systemGrey-light text-right text-[12px] font-normal">{{ props.time }}</a>
                     </div>
                     <div class="flex flex-col items-center">
-                        <a class="text-systemGrey-light text-right text-[12px] font-normal">陈日立</a>
+                        <a class="text-systemGrey-light text-right text-[12px] font-normal">{{ props.userName }}</a>
                     </div>
                 </div>
             </div>
             <div class="h-[51px] self-stretch">
                 <div class="flex w-[295px] flex-col items-center">
                     <a class="self-stretch font-normal text-textBlack-light text-[12px] leading-[138.7%] tracking-normal">
-                        太好吃了 我天天吃
-                        </a>
+                        {{ props.content }}
+                    </a>
                 </div>
                 <a class="text-systemBlue-light text-[11px] font-normal leading-normal">更多</a>
             </div>

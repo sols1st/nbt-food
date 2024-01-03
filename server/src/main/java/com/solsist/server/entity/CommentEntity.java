@@ -33,6 +33,9 @@ public class CommentEntity implements Serializable {
     @TableField(value = "user_id")
     private Integer userId;
 
+    @TableField(value = "user_name")
+    private String userName;
+
     @TableField(value = "content")
     private String content;
 
