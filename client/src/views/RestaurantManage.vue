@@ -77,8 +77,9 @@ import { ref } from "vue";
 import { RestaurantLocation, Restaurant } from "@/models/restaurant"
 import { Location } from "@/models/location"
 import { IonModal, IonInput, IonSelect, IonImg, IonSelectOption, IonButton, IonHeader, IonList, IonRefresher, IonRefresherContent, IonItemGroup, IonItemDivider, IonItemSliding, IonItem, IonItemOption, IonItemOptions, IonLabel, IonTitle, IonToolbar, IonButtons, IonBackButton, IonContent, IonPage } from '@ionic/vue';
-import { Camera, CameraResultType } from '@capacitor/camera';
-
+import { Camera, CameraResultType} from '@capacitor/camera';
+import uploadImg from '@/assets/uploadImg.svg'
+import UploadService from "@/services/upload"
 
 // Modal
 enum ModalType { Add, Modify }
@@ -86,18 +87,16 @@ const locationList = ref([] as Location[])
 const getLocationList = async () => {
     locationList.value = await LocationService.listLocation();
 }
+var picBase64 = ""
 
 const postPic = async () => {
-  const image = await Camera.getPhoto({
-    quality: 90,
-    allowEditing: true,
-    resultType: CameraResultType.Uri
-  });
-
-  var imageUrl = image.webPath;
-
-  // Can be set to the src of an image now
-  modalData.pic = imageUrl;
+    const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Base64
+    });
+    picBase64 = image.base64String || ""
+    modalData.value.pic = 'data:image/png;base64,' + image.base64String;
 };
 
 const openModal = (type: ModalType, r: Restaurant | null) => {
@@ -105,11 +104,13 @@ const openModal = (type: ModalType, r: Restaurant | null) => {
     switch (type) {
         case ModalType.Add:
             modalTitle.value = "添加餐馆"
-            modalData = {}
+            modalData.value = { pic: uploadImg }
             break
+        // Todo
         case ModalType.Modify:
             modalTitle.value = "编辑餐馆"
-            modalData = { ...r }
+            modalData.value = { ...r }
+            modalData.value.pic = "http://localhost:8080/api"+r?.pic
             break
         default:
             return
@@ -126,14 +127,14 @@ interface ModalData {
     locationId?: number
     pic?: string
 }
-var modalData: ModalData = {
+var modalData = ref<ModalData>({
     name: '',
     id: 0,
     description: '',
     locationName: '',
     locationId: 0,
-    pic: 'http://localhost:8080/api/pic/pic.jpg'
-}
+    pic: ''
+})
 
 var modalType: ModalType
 
@@ -151,11 +152,19 @@ const cancel = () => {
 const confirm = async () => {
     switch (modalType) {
         case ModalType.Add:
-            const { id, ...restaurant } = modalData
+            var pic = ""
+            if (picBase64 != undefined && picBase64 != "") {
+                console.log(picBase64)
+                pic = await UploadService.uploadImg(picBase64)
+            }
+            const { id, ...restaurant } = modalData.value
+            console.log(pic)
+            restaurant.pic = pic
+            console.log(restaurant.pic)
             await addRestaurant(restaurant)
             break
         case ModalType.Modify:
-            await updateRestaurant(modalData)
+            await updateRestaurant(modalData.value)
     }
     modal.value.$el.dismiss(null, 'confirm');
     isModalOpen.value = false;

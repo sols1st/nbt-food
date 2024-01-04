@@ -41,7 +41,6 @@ public class RestaurantController {
      */
 
 
-
     @GetMapping("list")
     public ResponseDTO list() {
         List<RestaurantEntity> list = restaurantService.list();
@@ -79,7 +78,7 @@ public class RestaurantController {
         if (restaurant != null) {
             return ResponseDTO.ok(restaurant);
         } else {
-            return ResponseDTO.fail(404,"没有找到对应餐馆");
+            return ResponseDTO.fail(404, "没有找到对应餐馆");
         }
 
     }
@@ -98,13 +97,12 @@ public class RestaurantController {
         Integer locationId = param.getIntValue("locationId");
 
 
-
         IPage<RestaurantEntity> page = restaurantService.page(
                 new Page<>(pageDTO.getCurrentPage(), pageDTO.getPageSize()),
                 Wrappers.<RestaurantEntity>lambdaQuery()
                         .like(name != null, RestaurantEntity::getName, name)
-                        .eq(locationId  != 0, RestaurantEntity::getLocationId, locationId)
-                        .eq(restaurantId  != 0, RestaurantEntity::getId, restaurantId)
+                        .eq(locationId != 0, RestaurantEntity::getLocationId, locationId)
+                        .eq(restaurantId != 0, RestaurantEntity::getId, restaurantId)
         );
 
         return PageUtil.pageResult(page);

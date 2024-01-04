@@ -959,12 +959,12 @@
 
 "@capacitor/camera@^5.0.8":
   version "5.0.8"
-  resolved "https://registry.npmmirror.com/@capacitor/camera/-/camera-5.0.8.tgz#e427cf8d189619d4c3ee1b491e8cf3d2469972ad"
+  resolved "https://registry.npmmirror.com/@capacitor/camera/-/camera-5.0.8.tgz"
   integrity sha512-V9kuBJV4s2AEFMiUiB5vpPD1qdfKRq/iFQ9euntuUYP+bOHQwGnwuERsQd48PoLUPV1up/08J8tJwGxMkDvPTQ==
 
 "@capacitor/core@^5.6.0":
   version "5.6.0"
-  resolved "https://registry.npmmirror.com/@capacitor/core/-/core-5.6.0.tgz#09f766f65d156cda6a0c86bed3b1cc6e4e1184cb"
+  resolved "https://registry.npmmirror.com/@capacitor/core/-/core-5.6.0.tgz"
   integrity sha512-xJhCOUGPHw0QYDA3YH+CmL6qiV9DH4Ij3yPxSenymjrtLuXI197u9ddCZwGEwgVIkh9kGZBBKzsNkn89SZ2gdQ==
   dependencies:
     tslib "^2.1.0"
@@ -1335,7 +1335,7 @@
 
 "@types/jsonwebtoken@^9.0.5":
   version "9.0.5"
-  resolved "https://registry.npmmirror.com/@types/jsonwebtoken/-/jsonwebtoken-9.0.5.tgz#0bd9b841c9e6c5a937c17656e2368f65da025588"
+  resolved "https://registry.npmmirror.com/@types/jsonwebtoken/-/jsonwebtoken-9.0.5.tgz"
   integrity sha512-VRLSGzik+Unrup6BsouBeHsf4d1hOEgYWTm/7Nmw1sXoN1+tRly/Gy/po3yeahnP4jfnQWWAhQAqcNfH7ngOkA==
   dependencies:
     "@types/node" "*"
@@ -1722,7 +1722,7 @@ caniuse-lite@^1.0.30001538, caniuse-lite@^1.0.30001565:
 
 capacitor@^0.5.6:
   version "0.5.6"
-  resolved "https://registry.npmmirror.com/capacitor/-/capacitor-0.5.6.tgz#089e58397019c042d79f41872d84512fe92a7e13"
+  resolved "https://registry.npmmirror.com/capacitor/-/capacitor-0.5.6.tgz"
   integrity sha512-xjyv2ztJxD1VayTMGIkh+TNfpdJU9BT3jO4Y5kEsh5MpF+zEdBQYLC/pFD9lNyS6mi8Pm3b/bj0ZUSOKblkfcw==
   dependencies:
     immutable "^3.7.3"
@@ -2272,7 +2272,7 @@ idb@^7.0.1:
 
 immutable@^3.7.3:
   version "3.8.2"
-  resolved "https://registry.npmmirror.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
+  resolved "https://registry.npmmirror.com/immutable/-/immutable-3.8.2.tgz"
   integrity sha512-15gZoQ38eYjEjxkorfbcgBKBL6R7T459OuK+CpcWt7O3KF4uPCx2tD0uFETlUDIyo+1789crbMhTvQBSR5yBMg==
 
 inflight@^1.0.4:

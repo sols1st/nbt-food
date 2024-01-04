@@ -20,7 +20,7 @@
                 <div class="flex items-start gap-[16px] self-stretch">
                     <div style="border: 1px solid rgba(0, 0, 0, 0.25);"
                         class="w-[118px] h-[118px] flex-shrink-0 rounded-[30px] overflow-hidden">
-                        <img src="../assets/jysb.png" class="w-full h-auto">
+                        <img :src="pic" class="w-full h-auto">
                     </div>
                     <div class="flex flex-col items-start gap-[11px] self-stretch">
                         <div class="flex flex-col items-start flex-grow self-stretch">
@@ -57,9 +57,11 @@
                 <div class="flex items-center gap-[16px] self-stretch">
                     <div class="flex flex-col justify-center items-center gap-[4px]">
                         <div class="flex items-start">
-                            <a v-if="score!=0" class=" text-rateColor-light-rate text-[60px] font-bold leading-[48px] tracking-[-1.8px]">{{
-                                score }}</a>
-                            <a v-else class=" text-rateColor-light-rate text-[20px] font-bold leading-[20px] mb-[10px] tracking-[-1.8px]">暂无评分</a>
+                            <a v-if="score != 0"
+                                class=" text-rateColor-light-rate text-[60px] font-bold leading-[48px] tracking-[-1.8px]">{{
+                                    score }}</a>
+                            <a v-else
+                                class=" text-rateColor-light-rate text-[20px] font-bold leading-[20px] mb-[10px] tracking-[-1.8px]">暂无评分</a>
                         </div>
                         <div class="flex items-start">
                             <a
@@ -108,11 +110,13 @@ import { Comment } from '@/models/comment';
 import CommentService from '@/services/comment';
 import { useRoute } from 'vue-router';
 import { CommentPage } from '@/models/page';
+import uploadImg from '@/assets/uploadImg.svg'
 const route = useRoute();
 const restaurantId = route.params.id as string;
 const isLoadFinished = ref(false)
 const hasComment = ref(false)
 const score = ref(0)
+const pic = ref("")
 
 
 const restaurant = ref({} as Restaurant);
@@ -124,6 +128,11 @@ const postComment = async (score: any) => {
 
 const getDetail = async () => {
     restaurant.value = await RestaurantService.queryRestaurant(restaurantId);
+    if (restaurant.value.pic != null && restaurant.value.pic != "") {
+        pic.value = "http://localhost:8080/api" + restaurant.value.pic
+    }else{
+        pic.value = uploadImg
+    }
     const page: CommentPage = {
         currentPage: 1,
         pageSize: 10,
